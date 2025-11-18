@@ -21,7 +21,10 @@
 export const testForm = form(
   z.object({
     message: z.string().min(1),
-    count: z.coerce.number().default(0)
+    count: z.string()
+      .default('')
+      .transform(val => val === '' ? 0 : Number(val))
+      .pipe(z.number())
   }),
   async (data) => {
     // Process form data
@@ -33,13 +36,20 @@ export const testForm = form(
 <form {...testForm.enhance(async ({ submit }) => {
   isSubmitting = true;
   try {
-    const result = await submit();
+    await submit();
+    const result = testForm.result; // Result available here
+
+    // Programmatic field control using .fields API
+    const count = Number(testForm.fields.count.value() || '0');
+    testForm.fields.count.set(String(count + 1));
+
     toast.success('Form submitted!');
   } finally {
     isSubmitting = false;
   }
 })}>
   <input name="message" />
+  <input name="count" type="number" />
   <button type="submit">Submit</button>
 </form>`}</code
 			></pre>
@@ -51,9 +61,15 @@ export const testForm = form(
 			{...testForm.enhance(async ({ submit }) => {
 				isSubmitting = true;
 				try {
-					const result = await submit();
-					lastResult = result;
+					await submit();
+					lastResult = testForm.result;
 					submissionCount++;
+
+					// Demonstrate .fields API: auto-increment count after submission
+					const currentCount = Number(testForm.fields.count.value() || '0');
+					console.log(currentCount);
+					testForm.fields.count.set(String(currentCount + 1));
+
 					toast.success('Form submitted successfully!');
 				} catch (error: any) {
 					toast.error(`Form error: ${error.message}`);
@@ -68,9 +84,8 @@ export const testForm = form(
 					Message <span class="text-destructive">*</span>
 				</label>
 				<input
+					{...testForm.fields.message.as('text')}
 					id="message"
-					name="message"
-					type="text"
 					required
 					placeholder="Enter a message..."
 					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
@@ -80,8 +95,8 @@ export const testForm = form(
 			<div>
 				<label for="count" class="mb-2 block text-sm font-medium"> Count </label>
 				<input
+					{...testForm.fields.count.as('text')}
 					id="count"
-					name="count"
 					type="number"
 					placeholder="0"
 					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
@@ -123,9 +138,11 @@ export const testForm = form(
 				JavaScript but enhance with client-side validation and loading states when JS is available.
 				The
 				<code class="rounded bg-muted px-1">.enhance()</code> method intercepts submission, handles
-				validation, and provides hooks for loading states. Note the
-				<code class="rounded bg-muted px-1">z.coerce.number()</code> which automatically converts the
-				string input to a number.
+				validation, and provides hooks for loading states. The
+				<code class="rounded bg-muted px-1">.fields</code> API allows programmatic control - use
+				<code class="rounded bg-muted px-1">.fields.count.value()</code> to read and
+				<code class="rounded bg-muted px-1">.fields.count.set()</code> to update field values. Try submitting
+				multiple times to see the count auto-increment!
 			</p>
 		</div>
 	</div>

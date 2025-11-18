@@ -47,7 +47,11 @@ export const incrementCounter = command(
 export const testForm = form(
 	z.object({
 		message: z.string().min(1, 'Message is required'),
-		count: z.coerce.number().default(0)
+		count: z
+			.string()
+			.default('')
+			.transform((val) => (val === '' ? 0 : Number(val)))
+			.pipe(z.number())
 	}),
 	async (data) => {
 		// Simulate processing delay
