@@ -1,11 +1,24 @@
 <script lang="ts">
 	import { testForm } from '../experimental.remote';
-	import { LoaderCircle, Send } from '@lucide/svelte';
+	import { LoaderCircle, Send, RefreshCw } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
 
 	let isSubmitting = $state(false);
 	let lastResult = $state<any>(null);
 	let submissionCount = $state(0);
+	let showValidation = $state(false);
+
+	// Validate form programmatically
+	function validateForm() {
+		showValidation = true;
+		testForm.validate();
+		const errors = testForm.fields.allIssues() ?? [];
+		if (errors.length > 0) {
+			toast.error(`Found ${errors.length} validation error(s)`);
+		} else {
+			toast.success('Form is valid!');
+		}
+	}
 </script>
 
 <div class="container mx-auto max-w-4xl py-8">
@@ -56,6 +69,18 @@ export const testForm = form(
 
 		<h2 class="mb-4 text-xl font-semibold">Live Demo:</h2>
 
+		<!-- Validate button -->
+		<div class="mb-4">
+			<button
+				type="button"
+				onclick={validateForm}
+				class="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+			>
+				<RefreshCw class="size-4" />
+				Validate Form
+			</button>
+		</div>
+
 		<!-- Form -->
 		<form
 			{...testForm.enhance(async ({ submit }) => {
@@ -90,6 +115,11 @@ export const testForm = form(
 					placeholder="Enter a message..."
 					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
 				/>
+				{#if showValidation}
+					{#each testForm.fields.message.issues() ?? [] as issue}
+						<p class="mt-1 text-sm text-destructive">{issue.message}</p>
+					{/each}
+				{/if}
 			</div>
 
 			<div>
