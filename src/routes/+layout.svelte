@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import GithubIcon from './github-icon.svelte';
+	import { Toaster } from '#lib/components/ui/sonner/index.ts';
 
 	let { children } = $props();
 </script>
@@ -68,3 +69,5 @@
 		</div>
 	</footer>
 </div>
+
+<Toaster richColors position="bottom-right" />

@@ -49,7 +49,7 @@ export const testForm = form(
 <form {...testForm.enhance(async ({ submit }) => {
   isSubmitting = true;
   try {
-    await submit();
+    if (!(await submit())) return; // false = validation failed
     const result = testForm.result; // Result available here
 
     // Programmatic field control using .fields API
@@ -85,14 +85,18 @@ export const testForm = form(
 		<form
 			{...testForm.enhance(async ({ submit }) => {
 				isSubmitting = true;
+				showValidation = true;
 				try {
-					await submit();
+					// submit() resolves to false when validation fails (it does not throw)
+					if (!(await submit())) {
+						toast.error('Please fix the validation errors');
+						return;
+					}
 					lastResult = testForm.result ?? null;
 					submissionCount++;
 
 					// Demonstrate .fields API: auto-increment count after submission
 					const currentCount = Number(testForm.fields.count.value() || '0');
-					console.log(currentCount);
 					testForm.fields.count.set(String(currentCount + 1));
 
 					toast.success('Form submitted successfully!');

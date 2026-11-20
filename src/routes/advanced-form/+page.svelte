@@ -146,7 +146,11 @@
 					isSubmitting = true;
 					showValidation = true;
 					try {
-						await submit();
+						// submit() resolves to false when validation fails (it does not throw)
+						if (!(await submit())) {
+							toast.error('Please fix the validation errors');
+							return;
+						}
 						lastResult = advancedProfileForm.result ?? null;
 						toast.success('Profile saved successfully!');
 					} catch (error) {
@@ -508,7 +512,7 @@ form.fields.name.value()
 
 // Enhanced submission
 {...form.enhance(async ({ submit }) => {
-  await submit()
+  if (!(await submit())) return // false = validation failed
   const result = form.result // Access result here
   // Handle result
 })}`}</code
