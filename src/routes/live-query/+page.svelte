@@ -110,7 +110,7 @@ await restartClock().updates(getServerClock);`;
 				<h3 class="font-semibold">Ticker (with argument)</h3>
 				<select
 					bind:value={symbol}
-					class="rounded-md border border-input bg-background px-2 py-1 text-sm"
+					class="rounded-md border border-input bg-background px-2 py-1 text-base pointer-fine:text-sm"
 				>
 					<option>SVLT</option>
 					<option>KIT</option>

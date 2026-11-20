@@ -176,7 +176,7 @@
 							id="name"
 							{...advancedProfileForm.fields.name.as('text')}
 							placeholder="Enter your name"
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if showValidation}
 							{#each advancedProfileForm.fields.name.issues() ?? [] as issue}
@@ -194,7 +194,7 @@
 							id="email"
 							{...advancedProfileForm.fields.email.as('text')}
 							placeholder="your.email@example.com"
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if showValidation}
 							{#each advancedProfileForm.fields.email.issues() ?? [] as issue}
@@ -213,7 +213,7 @@
 							{...advancedProfileForm.fields.age.as('number')}
 							min="18"
 							max="120"
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if showValidation}
 							{#each advancedProfileForm.fields.age.issues() ?? [] as issue}
@@ -231,7 +231,7 @@
 							id="password"
 							{...advancedProfileForm.fields._password.as('password')}
 							placeholder="Min 8 characters"
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if showValidation}
 							{#each advancedProfileForm.fields._password.issues() ?? [] as issue}
@@ -252,7 +252,7 @@
 							{...advancedProfileForm.fields.avatar.as('file')}
 							accept="image/*"
 							onchange={handleFileChange}
-							class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if avatarPreview}
 							<div class="mt-2">
@@ -278,7 +278,7 @@
 							id="street"
 							{...advancedProfileForm.fields.address.street.as('text')}
 							placeholder="123 Main St"
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						/>
 						{#if showValidation}
 							{#each advancedProfileForm.fields.address.street.issues() ?? [] as issue}
@@ -296,7 +296,7 @@
 								id="city"
 								{...advancedProfileForm.fields.address.city.as('text')}
 								placeholder="San Francisco"
-								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 							/>
 							{#if showValidation}
 								{#each advancedProfileForm.fields.address.city.issues() ?? [] as issue}
@@ -313,7 +313,7 @@
 								id="zip"
 								{...advancedProfileForm.fields.address.zip.as('text')}
 								placeholder="94102"
-								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 							/>
 							{#if showValidation}
 								{#each advancedProfileForm.fields.address.zip.issues() ?? [] as issue}
@@ -343,7 +343,7 @@
 							<input
 								{...advancedProfileForm.fields.skills[i].as('text')}
 								placeholder="e.g., JavaScript, Design, etc."
-								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+								class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 							/>
 							{#if skillCount > 1}
 								<button
@@ -397,7 +397,7 @@
 						<select
 							id="theme"
 							{...advancedProfileForm.fields.preferences.theme.as('select')}
-							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 						>
 							<option value="light">Light</option>
 							<option value="dark">Dark</option>
@@ -414,7 +414,7 @@
 						{...advancedProfileForm.fields.bio.as('text')}
 						rows="4"
 						placeholder="Tell us about yourself..."
-						class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+						class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:text-sm"
 					></textarea>
 					{#if showValidation}
 						{#each advancedProfileForm.fields.bio.issues() ?? [] as issue}

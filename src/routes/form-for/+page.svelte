@@ -51,7 +51,7 @@
 								<p class={issueClass}>{issue.message}</p>
 							{/each}
 						</div>
-						<Button type="submit" disabled={edit.pending > 0} class="h-10">
+						<Button type="submit" disabled={edit.pending > 0}>
 							{#if edit.pending}<LoaderCircle class="animate-spin" />{:else}<Save />{/if} Save
 						</Button>
 					</div>
