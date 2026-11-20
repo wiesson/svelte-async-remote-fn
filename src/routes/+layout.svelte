@@ -3,12 +3,49 @@
 	import BrandIcon from '#lib/components/brand-icon.svelte';
 	import { Toaster } from '#lib/components/ui/sonner/index.ts';
 	import { links } from '#lib/links.ts';
+	import { findPage, site } from '#lib/pages.ts';
+	import { page } from '$app/state';
 
 	let { children } = $props();
+
+	const meta = $derived(findPage(page.url.pathname));
+	const title = $derived(
+		meta && meta.href !== '/' ? `${meta.name} · ${site.name}` : `${site.name} · SvelteKit 3`
+	);
+	const description = $derived(meta?.description ?? site.description);
+	const canonical = $derived(new URL(page.url.pathname, site.url).href);
+	const image = $derived(`${site.url}/og/${meta?.slug ?? 'index'}.png`);
 
 	const iconLink =
 		'grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground';
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<link rel="canonical" href={canonical} />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<meta name="author" content={site.author} />
+	<meta name="theme-color" content="#ffffff" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={site.name} />
+	<meta property="og:url" content={canonical} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={image} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content={meta?.name ?? site.name} />
+	<meta property="og:locale" content="en_US" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content={site.x} />
+	<meta name="twitter:creator" content={site.x} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={image} />
+</svelte:head>
 
 <div class="flex min-h-screen flex-col">
 	<header class="border-b border-border">

@@ -16,10 +16,6 @@
 	} = $props();
 </script>
 
-<svelte:head>
-	<title>{title} · Remote Functions Patterns</title>
-</svelte:head>
-
 <div class="container mx-auto max-w-4xl py-8">
 	<a href="/" class="mb-4 inline-block text-primary hover:underline"> ← Back to patterns </a>
 
