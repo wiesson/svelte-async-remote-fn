@@ -1,10 +1,13 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
+	import * as Card from '#lib/components/ui/card/index.ts';
 
-	let { posts, userId } = $props<{
+	let {
+		posts,
+		userId
+	}: {
 		posts: Array<{ id: number; title: string; userId: string }>;
 		userId: string;
-	}>();
+	} = $props();
 </script>
 
 <Card.Card>

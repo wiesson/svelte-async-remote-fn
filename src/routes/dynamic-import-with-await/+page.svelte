@@ -21,9 +21,9 @@
 {/await}
 
 <!-- async-dataloader.svelte -->
-<script>
+\u003cscript>
   import { getDelayedTime } from './experimental.remote';
-</script>
+\u003c/script>
 
 {#await getDelayedTime({ delay: 1000 })}
   <p>Loading data...</p>

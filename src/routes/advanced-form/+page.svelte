@@ -4,7 +4,7 @@
 	import { toast } from 'svelte-sonner';
 
 	let isSubmitting = $state(false);
-	let lastResult = $state<any>(null);
+	let lastResult = $state<typeof advancedProfileForm.result | null>(null);
 	let avatarPreview = $state<string | null>(null);
 	let showValidation = $state(false);
 
@@ -57,8 +57,8 @@
 			},
 			skills: ['JavaScript', 'TypeScript', 'Svelte'],
 			preferences: {
-				newsletter: 'true',
-				notifications: 'false',
+				newsletter: true,
+				notifications: false,
 				theme: 'dark'
 			},
 			bio: 'Passionate developer who loves building modern web applications.'
@@ -76,7 +76,7 @@
 			_password: '',
 			address: { street: '', city: '', zip: '' },
 			skills: [''],
-			preferences: { newsletter: 'false', notifications: 'false', theme: 'auto' },
+			preferences: { newsletter: false, notifications: false, theme: 'auto' },
 			bio: ''
 		});
 		skillCount = 1;
@@ -147,10 +147,10 @@
 					showValidation = true;
 					try {
 						await submit();
-						lastResult = advancedProfileForm.result;
+						lastResult = advancedProfileForm.result ?? null;
 						toast.success('Profile saved successfully!');
-					} catch (error: any) {
-						toast.error(`Error: ${error.message}`);
+					} catch (error) {
+						toast.error(`Error: ${(error as Error).message}`);
 					} finally {
 						isSubmitting = false;
 					}
@@ -372,9 +372,7 @@
 					<div class="flex items-center gap-2">
 						<input
 							id="newsletter"
-							type="checkbox"
-							name="preferences.newsletter"
-							value="true"
+							{...advancedProfileForm.fields.preferences.newsletter.as('checkbox')}
 							class="size-4 rounded border-input bg-background ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
 						/>
 						<label for="newsletter" class="text-sm font-medium"> Subscribe to newsletter </label>
@@ -383,9 +381,7 @@
 					<div class="flex items-center gap-2">
 						<input
 							id="notifications"
-							type="checkbox"
-							name="preferences.notifications"
-							value="true"
+							{...advancedProfileForm.fields.preferences.notifications.as('checkbox')}
 							class="size-4 rounded border-input bg-background ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
 						/>
 						<label for="notifications" class="text-sm font-medium">
@@ -397,7 +393,7 @@
 						<label for="theme" class="mb-2 block text-sm font-medium"> Theme Preference </label>
 						<select
 							id="theme"
-							name="preferences.theme"
+							{...advancedProfileForm.fields.preferences.theme.as('select')}
 							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
 						>
 							<option value="light">Light</option>
@@ -412,7 +408,7 @@
 					<label for="bio" class="mb-2 block text-sm font-medium"> Bio (Optional) </label>
 					<textarea
 						id="bio"
-						name="bio"
+						{...advancedProfileForm.fields.bio.as('text')}
 						rows="4"
 						placeholder="Tell us about yourself..."
 						class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
@@ -462,22 +458,23 @@
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500">✓</span>
-						<span><strong>Field binding:</strong> Using <code>.as()</code> for all input types</span
-						>
+						<span>
+							<strong>Field binding:</strong> Using <code>.as()</code> for all input types
+						</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500">✓</span>
-						<span
-							><strong>Validation:</strong> Real-time with <code>.validate()</code> and
-							<code>.issues()</code></span
-						>
+						<span>
+							<strong>Validation:</strong> Real-time with <code>.validate()</code> and
+							<code>.issues()</code>
+						</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500">✓</span>
-						<span
-							><strong>Programmatic control:</strong> Using <code>.set()</code> and
-							<code>.value()</code></span
-						>
+						<span>
+							<strong>Programmatic control:</strong> Using <code>.set()</code> and
+							<code>.value()</code>
+						</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500">✓</span>

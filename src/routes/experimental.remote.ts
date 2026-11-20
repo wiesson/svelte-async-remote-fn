@@ -1,4 +1,4 @@
-import { query, command, form, getRequestEvent } from '$app/server';
+import { query, command, form } from '$app/server';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -176,7 +176,7 @@ export const getTeamMembers = query(
 	z.object({
 		teamId: z.string()
 	}),
-	async ({ teamId }) => {
+	async () => {
 		console.log('[Waterfall 5/5] Fetching team members...');
 		await new Promise((resolve) => setTimeout(resolve, 400));
 

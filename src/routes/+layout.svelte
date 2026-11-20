@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { Github } from '@lucide/svelte';
+	import GithubIcon from './github-icon.svelte';
 
 	let { children } = $props();
 </script>
@@ -14,7 +14,7 @@
 		class="fixed top-4 right-4 z-50 text-muted-foreground transition-colors hover:text-foreground"
 		aria-label="View source on GitHub"
 	>
-		<Github class="size-6" />
+		<GithubIcon class="size-6" />
 	</a>
 
 	<!-- Main Content -->
@@ -61,7 +61,7 @@
 					class="inline-flex items-center gap-1 transition-colors hover:text-primary"
 					aria-label="View source on GitHub"
 				>
-					<Github class="size-4" />
+					<GithubIcon class="size-4" />
 					<span>GitHub</span>
 				</a>
 			</p>

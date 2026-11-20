@@ -6,7 +6,7 @@
 		getUserProfile,
 		getTeamMembers
 	} from '../experimental.remote';
-	import * as Card from '$lib/components/ui/card';
+	import * as Card from '#lib/components/ui/card/index.ts';
 
 	// Step 1: Get initial data
 	const initialData = getInitialData({});

@@ -4,7 +4,7 @@
 	import { toast } from 'svelte-sonner';
 
 	let isSubmitting = $state(false);
-	let lastResult = $state<any>(null);
+	let lastResult = $state<typeof testForm.result | null>(null);
 	let submissionCount = $state(0);
 	let showValidation = $state(false);
 
@@ -61,8 +61,8 @@ export const testForm = form(
     isSubmitting = false;
   }
 })}>
-  <input name="message" />
-  <input name="count" type="number" />
+  <input {...testForm.fields.message.as('text')} />
+  <input {...testForm.fields.count.as('text')} />
   <button type="submit">Submit</button>
 </form>`}</code
 			></pre>
@@ -87,7 +87,7 @@ export const testForm = form(
 				isSubmitting = true;
 				try {
 					await submit();
-					lastResult = testForm.result;
+					lastResult = testForm.result ?? null;
 					submissionCount++;
 
 					// Demonstrate .fields API: auto-increment count after submission
@@ -96,8 +96,8 @@ export const testForm = form(
 					testForm.fields.count.set(String(currentCount + 1));
 
 					toast.success('Form submitted successfully!');
-				} catch (error: any) {
-					toast.error(`Form error: ${error.message}`);
+				} catch (error) {
+					toast.error(`Form error: ${(error as Error).message}`);
 				} finally {
 					isSubmitting = false;
 				}

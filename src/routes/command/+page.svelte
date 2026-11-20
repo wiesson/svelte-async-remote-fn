@@ -14,8 +14,8 @@
 			counter = result.newValue;
 			lastTimestamp = result.timestamp;
 			toast.success(`Counter incremented to ${result.newValue}`);
-		} catch (error: any) {
-			toast.error(`Failed to increment: ${error.message}`);
+		} catch (error) {
+			toast.error(`Failed to increment: ${(error as Error).message}`);
 		} finally {
 			isExecuting = false;
 		}

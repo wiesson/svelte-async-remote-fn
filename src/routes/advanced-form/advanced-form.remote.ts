@@ -28,16 +28,10 @@ export const advancedProfileForm = form(
 		// Array of strings
 		skills: z.array(z.string().min(1, 'Skill cannot be empty')).min(1, 'Add at least one skill'),
 
-		// Nested preferences object with booleans
+		// Nested preferences object with booleans (must be optional: unchecked boxes send nothing)
 		preferences: z.object({
-			newsletter: z
-				.string()
-				.transform((val) => val === 'true')
-				.pipe(z.boolean()),
-			notifications: z
-				.string()
-				.transform((val) => val === 'true')
-				.pipe(z.boolean()),
+			newsletter: z.boolean().default(false),
+			notifications: z.boolean().default(false),
 			theme: z.enum(['light', 'dark', 'auto'])
 		}),
 

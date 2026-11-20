@@ -28,7 +28,7 @@
 }}>
   {#snippet failed(error, reset)}
     <div>
-      <p>Error: {error.message}</p>
+      <p>Error: {(error as Error).message}</p>
       <button onclick={reset}>Retry</button>
     </div>
   {/snippet}
@@ -67,7 +67,7 @@
 								<AlertTriangle class="mt-1 size-5 shrink-0" />
 								<div class="flex-1">
 									<p class="mb-1 font-semibold">Error caught by boundary:</p>
-									<p class="text-sm opacity-90">{error.message}</p>
+									<p class="text-sm opacity-90">{(error as Error).message}</p>
 								</div>
 							</div>
 							<button
