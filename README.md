@@ -1,7 +1,7 @@
 # 🚀 SvelteKit Remote Functions - Interactive Showcase
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen?style=for-the-badge)](https://svelte-async-remote-fn.vercel.app)
-[![SvelteKit](https://img.shields.io/badge/SvelteKit-5.0-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://kit.svelte.dev)
+[![SvelteKit](https://img.shields.io/badge/SvelteKit-3-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://kit.svelte.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
@@ -21,28 +21,41 @@ Remote Functions are SvelteKit's approach to **type-safe client-server communica
 
 ## 🎨 Live Patterns
 
-This demo showcases **9 different patterns** for working with Remote Functions:
+This demo showcases **22 patterns** for working with Remote Functions on SvelteKit 3:
 
-### 📊 Query Patterns
+### 📊 Reading data
 
-- **Top-level await** - Using `{#await query()}` directly in templates
-- **Direct .current access** - Accessing `query().current` for manual control
-- **Derived reactive queries** - Using `$derived()` for reactive data
-- **Manual refresh** - Calling `.refresh()` on demand
+- **Top-level await**: `{#await query()}` directly in templates
+- **Direct .current access**: `query().current` for manual control
+- **Derived reactive queries**: `$derived()` for reactive arguments
+- **Manual refresh**: `.refresh()` on demand
+- **pending, ready & loading**: built-in status instead of manual flags
+- **Batched queries**: `query.batch()` against the n+1 problem
+- **Live queries**: streaming server data with `query.live()`, `connected` and `reconnect()`
+- **Prerendered data**: `prerender()` with `inputs` and `dynamic`
+- **Waterfall loading**: the anti-pattern, for comparison
 
-### 🎬 Command Patterns
+### 🎬 Writing data
 
-- **Command pattern** - Using `command()` for mutations and updates
+- **Command pattern**: `command()` for mutations
+- **Single-flight mutations**: `refresh()`/`set()` in handlers, `.updates()` + `requested()`, optimistic `withOverride()`
 
-### 📝 Form Patterns
+### 📝 Forms
 
-- **Form pattern** - Progressive enhancement with `form()`
+- **Form pattern** and **Advanced form**: progressive enhancement, nested objects, arrays, files
+- **Input types**: radios, checkbox groups, `select multiple`, ranges with typed values
+- **Client-side preflight**: `.preflight(schema)` and `validate({ all: true })`
+- **Server-side validation**: `invalid(issue.field('…'))` and form-level issues
+- **Multiple submit buttons**: `.as('submit', value)`
+- **Multiple form instances**: `.for(id)`
 
-### 🛡️ Advanced Patterns
+### 🛡️ Server, errors & loading
 
-- **Error boundary** - Using `<svelte:boundary>` to catch errors
-- **Dynamic import with await** - Lazy-loading components that use async data
-- **Dynamic import (no # syntax)** - Testing `{await}` without hash symbol
+- **getRequestEvent & auth**: cookies, headers, `requireUser()` per function
+- **Error boundary**: `<svelte:boundary>` around failing queries
+- **Dynamic imports**: lazy components that use top-level await
+
+Demo state that changes (todos, stock, login) is stored in a cookie per visitor.
 
 ## 🚀 Quick Start
 

@@ -48,7 +48,7 @@
 		advancedProfileForm.fields.set({
 			name: 'Jane Doe',
 			email: 'jane.doe@example.com',
-			age: '28',
+			age: 28,
 			_password: 'SecurePass123!',
 			address: {
 				street: '123 Main St',
@@ -72,7 +72,7 @@
 		advancedProfileForm.fields.set({
 			name: '',
 			email: '',
-			age: '18',
+			age: 18,
 			_password: '',
 			address: { street: '', city: '', zip: '' },
 			skills: [''],
@@ -210,8 +210,7 @@
 						</label>
 						<input
 							id="age"
-							{...advancedProfileForm.fields.age.as('text')}
-							type="number"
+							{...advancedProfileForm.fields.age.as('number')}
 							min="18"
 							max="120"
 							class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"

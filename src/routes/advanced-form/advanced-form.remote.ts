@@ -7,10 +7,7 @@ export const advancedProfileForm = form(
 		// Basic fields
 		name: z.string().min(2, 'Name must be at least 2 characters'),
 		email: z.email('Please enter a valid email address'),
-		age: z
-			.string()
-			.transform((val) => parseInt(val, 10))
-			.pipe(z.number().min(18, 'Must be 18 or older').max(120, 'Invalid age')),
+		age: z.number().int().min(18, 'Must be 18 or older').max(120, 'Invalid age'),
 
 		// Sensitive field (won't repopulate after submission when prefixed with _)
 		_password: z.string().min(8, 'Password must be at least 8 characters'),

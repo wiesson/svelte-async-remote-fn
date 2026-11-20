@@ -34,10 +34,7 @@
 export const testForm = form(
   z.object({
     message: z.string().min(1),
-    count: z.string()
-      .default('')
-      .transform(val => val === '' ? 0 : Number(val))
-      .pipe(z.number())
+    count: z.number().default(0) // .as('number') sends a real number
   }),
   async (data) => {
     // Process form data
@@ -53,8 +50,8 @@ export const testForm = form(
     const result = testForm.result; // Result available here
 
     // Programmatic field control using .fields API
-    const count = Number(testForm.fields.count.value() || '0');
-    testForm.fields.count.set(String(count + 1));
+    const count = testForm.fields.count.value() ?? 0;
+    testForm.fields.count.set(count + 1);
 
     toast.success('Form submitted!');
   } finally {
@@ -62,7 +59,7 @@ export const testForm = form(
   }
 })}>
   <input {...testForm.fields.message.as('text')} />
-  <input {...testForm.fields.count.as('text')} />
+  <input {...testForm.fields.count.as('number')} />
   <button type="submit">Submit</button>
 </form>`}</code
 			></pre>
@@ -96,8 +93,8 @@ export const testForm = form(
 					submissionCount++;
 
 					// Demonstrate .fields API: auto-increment count after submission
-					const currentCount = Number(testForm.fields.count.value() || '0');
-					testForm.fields.count.set(String(currentCount + 1));
+					const currentCount = testForm.fields.count.value() ?? 0;
+					testForm.fields.count.set(currentCount + 1);
 
 					toast.success('Form submitted successfully!');
 				} catch (error) {
@@ -129,9 +126,8 @@ export const testForm = form(
 			<div>
 				<label for="count" class="mb-2 block text-sm font-medium"> Count </label>
 				<input
-					{...testForm.fields.count.as('text')}
+					{...testForm.fields.count.as('number')}
 					id="count"
-					type="number"
 					placeholder="0"
 					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
 				/>

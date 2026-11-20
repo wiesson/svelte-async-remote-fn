@@ -47,11 +47,8 @@ export const incrementCounter = command(
 export const testForm = form(
 	z.object({
 		message: z.string().min(1, 'Message is required'),
-		count: z
-			.string()
-			.default('')
-			.transform((val) => (val === '' ? 0 : Number(val)))
-			.pipe(z.number())
+		// .as('number') coerces the input, so the schema can expect a number directly
+		count: z.number().default(0)
 	}),
 	async (data) => {
 		// Simulate processing delay
