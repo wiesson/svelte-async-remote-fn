@@ -1,4 +1,17 @@
 <script lang="ts">
+	import BrandIcon from '#lib/components/brand-icon.svelte';
+	import { links } from '#lib/links.ts';
+
+	// The pill says the same as the footer, so it steps aside once the footer is visible
+	let footerVisible = $state(false);
+	$effect(() => {
+		const footer = document.querySelector('footer');
+		if (!footer) return;
+		const observer = new IntersectionObserver(([entry]) => (footerVisible = entry.isIntersecting));
+		observer.observe(footer);
+		return () => observer.disconnect();
+	});
+
 	type Pattern = { name: string; href: string; description: string; isNew?: boolean };
 
 	const groups: { title: string; patterns: Pattern[] }[] = [
@@ -174,3 +187,20 @@
 		</section>
 	{/each}
 </div>
+
+<a
+	href={links.x}
+	target="_blank"
+	rel="noopener noreferrer"
+	class="fixed bottom-4 left-4 z-40 flex items-center gap-2 rounded-full bg-background/85 py-1 pr-3.5 pl-1 shadow-lg ring-1 shadow-black/5 ring-border backdrop-blur transition duration-300 hover:-translate-y-0.5 {footerVisible
+		? 'pointer-events-none translate-y-2 opacity-0'
+		: 'opacity-100'}"
+	aria-hidden={footerVisible}
+	tabindex={footerVisible ? -1 : undefined}
+>
+	<img src="/wiesson.jpg" alt="" width="32" height="32" class="size-8 rounded-full" />
+	<span class="text-sm"
+		><span class="text-muted-foreground">by</span> <span class="font-semibold">@wiesson</span></span
+	>
+	<BrandIcon name="x" class="size-3.5 text-muted-foreground" />
+</a>
